@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+    environment {
+        DOCKER_CREDS = credentials('docker-hub-creds')
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                // Agar local folder hai toh ye step skip ho sakta hai 
+                // par pipeline test karne ke liye zaroori hai
+                echo 'Checking out code...'
+            }
+        }
+        stage('Terraform Infra') {
+            steps {
+                dir('Terraform') {
+                    sh 'terraform init'
+                    sh 'terraform apply -auto-approve'
+                }
+            }
+        }
+        stage('Build Microservices') {
+            steps {
+                sh 'docker build -t user-service ./user-service'
+                sh 'docker build -t auth-service ./auth-service'
+            }
+        }
+        stage('K8s Deployment') {
+            steps {
+                // Minikube pe deploy karna
+                sh 'kubectl apply -f k8s-specs/'
+            }
+        }
+    }
+}

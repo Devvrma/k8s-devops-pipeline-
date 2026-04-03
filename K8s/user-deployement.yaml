@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service-deployment
+spec:
+  replicas: 2        # Ye 2 containers chalayega (High Availability!)
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+      - name: user-service
+        image: my-user-service:v2
+        imagePullPolicy: Never  # Kyunki image local hai
+        ports:
+        - containerPort: 5001

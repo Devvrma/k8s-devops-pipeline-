@@ -1,0 +1,10 @@
+# Ignore Terraform heavy files
+.terraform/
+*.exe
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.lock.hcl
+
+# Ignore Docker/Python cache
+__pycache__/
+*.pyc
