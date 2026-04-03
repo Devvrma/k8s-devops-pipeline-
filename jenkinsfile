@@ -1,16 +1,12 @@
-pipeline {
+ipeline {
     agent any
+    
     environment {
-        DOCKER_CREDS = credentials('docker-hub-creds')
+        // Isse Jenkins ke "Manage Credentials" section mein match hona chahiye
+        DOCKER_HUB_CREDS = credentials('docker-hub-creds')
     }
+
     stages {
-        stage('Checkout') {
-            steps {
-                // Agar local folder hai toh ye step skip ho sakta hai 
-                // par pipeline test karne ke liye zaroori hai
-                echo 'Checking out code...'
-            }
-        }
         stage('Terraform Infra') {
             steps {
                 dir('Terraform') {
@@ -19,17 +15,34 @@ pipeline {
                 }
             }
         }
-        stage('Build Microservices') {
+
+        stage('Docker Build & Push') {
             steps {
-                sh 'docker build -t user-service ./user-service'
-                sh 'docker build -t auth-service ./auth-service'
+                // Login using credentials
+                sh "echo \$DOCKER_HUB_CREDS_PSW | docker login -u \$DOCKER_HUB_CREDS_USR --password-stdin"
+                
+                // Build and Push User Service
+                sh "docker build -t \$DOCKER_HUB_CREDS_USR/user-service:latest ./user-service"
+                sh "docker push \$DOCKER_HUB_CREDS_USR/user-service:latest"
+                
+                // Build and Push Auth Service
+                sh "docker build -t \$DOCKER_HUB_CREDS_USR/auth-service:latest ./auth-service"
+                sh "docker push \$DOCKER_HUB_CREDS_USR/auth-service:latest"
             }
         }
+
         stage('K8s Deployment') {
             steps {
-                // Minikube pe deploy karna
+                // Kubernetes manifests apply karna
                 sh 'kubectl apply -f k8s-specs/'
             }
+        }
+    }
+    
+    post {
+        always {
+            // Logout for security
+            sh 'docker logout'
         }
     }
 }
