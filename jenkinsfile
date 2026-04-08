@@ -1,5 +1,8 @@
 pipeline {
     agent any
+ tools {
+        terraform 'terraform'
+    }
     
     environment {
         // Isse Jenkins ke "Manage Credentials" section mein match hona chahiye
