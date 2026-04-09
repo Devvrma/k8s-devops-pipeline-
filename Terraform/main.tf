@@ -9,7 +9,7 @@ provider "aws" {
 
   endpoints {
     s3  = "http://host.docker.internal:4566"
-    sts = "http://localhost:4566" # STS bhi localstack pe bhej do
+    sts = "http://host.docker.internal:4566"  
   }
 }
 
