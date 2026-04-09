@@ -8,7 +8,7 @@ provider "aws" {
   skip_requesting_account_id  = true # Ye line zaroori hai error hatane ke liye
 
   endpoints {
-    s3  = "http://localhost:4566"
+    s3  = "http://host.docker.internal:4566"
     sts = "http://localhost:4566" # STS bhi localstack pe bhej do
   }
 }
