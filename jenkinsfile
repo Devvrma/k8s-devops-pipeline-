@@ -37,7 +37,7 @@ pipeline {
         stage('K8s Deployment') {
             steps {
                 // Kubernetes manifests apply karna
-                sh 'kubectl apply -f k8s/'
+                sh 'kubectl apply -f K8s/'
             }
         }
     }
