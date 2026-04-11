@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: user-service-deployment
 spec:
-  replicas: 2        # Ye 2 containers chalayega (High Availability!)
+  replicas: 2        
   selector:
     matchLabels:
       app: user-service
@@ -15,6 +15,6 @@ spec:
       containers:
       - name: user-service
         image: my-user-service:v2
-        imagePullPolicy: Never  # Kyunki image local hai
+        imagePullPolicy: Never
         ports:
-        - containerPort: 5001
+        - containerPort: 5002
