@@ -1,6 +1,10 @@
-from flask import Flask, jsonify
+    from flask import Flask, jsonify
 
 app = Flask(__name__)
+
+@app.get('/')
+def home():
+    return jsonify({"message": "User Service Running"})
 
 @app.get('/login')
 def login():
