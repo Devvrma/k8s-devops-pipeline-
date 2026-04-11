@@ -4,9 +4,9 @@ metadata:
   name: user-service-lb
 spec:
   selector:
-    app: user-service    # Ye wahi label hai jo Deployment mein tha
+    app: user-service    
   ports:
     - protocol: TCP
-      port: 80           # Bahar se is port pe request aayegi
-      targetPort: 5001   # Ye request pod ke 5001 port pe jayegi
-  type: LoadBalancer     # Ye port ko expose karne mein madad karta hai
+      port: 80           
+      targetPort: 5002
+  type: LoadBalancer     
