@@ -27,6 +27,8 @@ pipeline {
                 // Build and Push User Service
                 sh "docker build -t \$DOCKER_HUB_CREDS_USR/user-service:latest ./user-service"
                 sh "docker push \$DOCKER_HUB_CREDS_USR/user-service:latest"
+                sh "docker build -t $DOCKER_HUB_CREDS_USR/auth-service:latest ./auth-service"
+                sh "docker push $DOCKER_HUB_CREDS_USR/auth-service:latest"
                 
                 // Build and Push Auth Service
                 sh "docker build -t \$DOCKER_HUB_CREDS_USR/auth-service:latest ./auth-service"
