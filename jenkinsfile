@@ -19,13 +19,6 @@ pipeline {
             }
         }
 
-        stage('Docker Build & Push') {
-            steps {
-                // Login using credentials
-                sh "echo \$DOCKER_HUB_CREDS_PSW | docker login -u \$DOCKER_HUB_CREDS_USR --password-stdin"
-            }
-        }
-
         stage('K8s Deployment') {
             steps {
                 // Kubernetes manifests apply karna
