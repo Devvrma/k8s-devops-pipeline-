@@ -23,12 +23,6 @@ pipeline {
             steps {
                 // Login using credentials
                 sh "echo \$DOCKER_HUB_CREDS_PSW | docker login -u \$DOCKER_HUB_CREDS_USR --password-stdin"
-                
-                // Build and Push User Service
-                sh "docker build -t \$DOCKER_HUB_CREDS_USR/user-service:latest ./user-service"
-                sh "docker push \$DOCKER_HUB_CREDS_USR/user-service:latest"
-                sh "docker build -t $DOCKER_HUB_CREDS_USR/auth-service:latest ./auth-service"
-                sh "docker push $DOCKER_HUB_CREDS_USR/auth-service:latest"
             }
         }
 
