@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-service-deployment
+  name: auth-service-deployment
 spec:
-  replicas: 2        
+  replicas: 1
   selector:
     matchLabels:
-      app: user-service
+      app: auth-service
   template:
     metadata:
       labels:
-        app: user-service
+        app: auth-service
     spec:
       containers:
-      - name: user-service
-        image: my-user-service:v2
+      - name: auth-service
+        image: my-auth-service:v1
         imagePullPolicy: Never
         ports:
         - containerPort: 5002

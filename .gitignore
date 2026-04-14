@@ -4,7 +4,9 @@
 terraform.tfstate
 terraform.tfstate.backup
 .terraform.lock.hcl
-
-# Ignore Docker/Python cache
 __pycache__/
 *.pyc
+jenkins_backup/
+localstack_data/
+*.exe
+*.log
