@@ -1,12 +1,8 @@
 pipeline {
     agent any
- tools {
+
+    tools {
         terraform 'terraform'
-    }
-    
-    environment {
-        // Isse Jenkins ke "Manage Credentials" section mein match hona chahiye
-        DOCKER_HUB_CREDS = credentials('docker-hub-creds')
     }
 
     stages {
@@ -21,16 +17,8 @@ pipeline {
 
         stage('K8s Deployment') {
             steps {
-                // Kubernetes manifests apply karna
                 sh 'kubectl apply -f K8s/'
             }
-        }
-    }
-    
-    post {
-        always {
-            // Logout for security
-            sh 'docker logout'
         }
     }
 }
