@@ -1,24 +1,26 @@
 pipeline {
-    agent any
+agent any
 
-    tools {
-        terraform 'terraform'
-    }
+```
+stages {
 
-    stages {
-        stage('Terraform Infra') {
-            steps {
-                dir('Terraform') {
-                    sh 'terraform init'
-                    sh 'terraform apply -auto-approve'
-                }
-            }
-        }
-
-        stage('K8s Deployment') {
-            steps {
-                sh 'kubectl apply -f K8s/'
-            }
+    stage('Terraform Infra') {
+        steps {
+            bat 'cd Terraform && terraform init'
+            bat 'cd Terraform && terraform apply -auto-approve'
         }
     }
+
+    stage('K8s Deployment') {
+        steps {
+            bat 'kubectl apply -f K8s\\'
+        }
+    }
+
+    stage('Verify') {
+        steps {
+            bat 'kubectl get pods'
+        }
+    }
+}
 }
