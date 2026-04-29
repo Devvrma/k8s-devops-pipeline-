@@ -1,12 +1,22 @@
-# Ignore Terraform heavy files
 .terraform/
-*.exe
-terraform.tfstate
-terraform.tfstate.backup
+*.tfstate
+*.tfstate.*
 .terraform.lock.hcl
+
 __pycache__/
 *.pyc
+
 jenkins_backup/
 localstack_data/
-*.exe
+
 *.log
+
+.vscode/
+.idea/
+.DS_Store
+
+
+.env
+*.pem
+
+*.exe
