@@ -20,3 +20,5 @@ localstack_data/
 *.pem
 
 *.exe
+jenkins.war
+*.war
