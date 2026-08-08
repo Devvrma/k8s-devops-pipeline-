@@ -133,7 +133,3 @@ Point a Jenkins pipeline job at this repository and it will run the stages above
 
 - LocalStack is used to simulate AWS S3 locally — no real AWS credentials or costs are involved (`test`/`test` dummy credentials).
 - `imagePullPolicy: Never` is used in the deployments, so images must be built directly into your cluster's Docker daemon (see Minikube step above) rather than pulled from a registry.
-
-## License
-
-No license specified yet — add one if you plan to share or open-source this project.
